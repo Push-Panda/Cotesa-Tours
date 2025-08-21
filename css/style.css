@@ -21,24 +21,26 @@ header {
   padding: 1.2rem 0;
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 2000; /* make sure nav is above other content */
   box-shadow: 0 2px 12px rgba(0, 191, 174, 0.08);
 }
 
+/* Default nav styles */
 #main-nav {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 #main-nav ul {
   display: flex;
+  gap: 20px;
+  z-index: 2001; /* keeps dropdown visible */
+  margin: 0 auto;
   align-items: center;
   list-style: none;
-  gap: 2.2rem;
+  position: relative;
 }
 
 #main-nav ul .brand-name {
@@ -71,10 +73,13 @@ header {
 
 #nav-toggle {
   display: none;
-  flex-direction: column;
+  font-size: 2rem;
   background: none;
   border: none;
+  color: #fff;
   cursor: pointer;
+  z-index: 2001;
+  flex-direction: column;
   gap: 4px;
   position: absolute;
   right: 1rem;
@@ -87,6 +92,18 @@ header {
   height: 3px;
   background: var(--white);
   border-radius: 2px;
+}
+
+/* Overlay (hidden by default) */
+#nav-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  z-index: 2000;
 }
 
 /* Hero Section */
@@ -449,7 +466,7 @@ h2 {
 }
 
 .accordion.active:after {
-  content: "\2212";
+  content: \"\2212\";
 }
 
 .panel {
@@ -548,23 +565,58 @@ footer {
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
+  #nav-toggle {
+    display: block;
+  }
+
   #main-nav ul {
     flex-direction: column;
     background: var(--primary);
     position: absolute;
-    top: 64px;
-    left: 0;
-    width: 100%;
-    display: none;
-    z-index: 100;
+    top: 60px;
+    right: 20px;
+    padding: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    z-index: 2002;
+
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.4s ease, opacity 0.3s ease;
   }
+
+  #main-nav ul li {
+    padding: 0.8rem 1rem;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
   #main-nav ul.active {
+    max-height: 500px;
+    opacity: 1;
     display: flex;
   }
-  #nav-toggle {
-    display: flex;
+
+  /* Animate items in when active */
+  #main-nav ul.active li {
+    opacity: 1;
+    transform: translateY(0);
   }
+
+  /* Stagger effect */
+  #main-nav ul.active li:nth-child(1) { transition-delay: 0.1s; }
+  #main-nav ul.active li:nth-child(2) { transition-delay: 0.2s; }
+  #main-nav ul.active li:nth-child(3) { transition-delay: 0.3s; }
+  #main-nav ul.active li:nth-child(4) { transition-delay: 0.4s; }
+  #main-nav ul.active li:nth-child(5) { transition-delay: 0.5s; }
+
+  /* Show overlay when menu is active */
+  #nav-overlay.active {
+    display: block;
+  }
+
   .hero {
     height: 60vh;
   }
