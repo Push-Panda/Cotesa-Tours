@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 🌍 Cotesa Tours - Responsive Travel Website
 
 This project is part of the Responsive Design Final Project, featuring a fully responsive tourism website for the fictional travel brand Cotesa Tours. It showcases custom layouts, a vibrant color palette, and adaptive breakpoints for desktop, tablet, and mobile devices.
@@ -162,3 +163,7 @@ This project is licensed under the MIT License. Feel free to use, modify, and di
 Inspired by the Responsive Design Final Project guidelines.
 Thanks to OpenStreetMap for map data.
 Color inspiration from Kenya’s natural and cultural beauty.
+=======
+# Cotesa-Tours
+Responsive travel website for Cotesa Tours - Kenya tourism site.
+>>>>>>> 50823c7a18a23d6d94def4038adc57ab53105967
